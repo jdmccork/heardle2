@@ -1,0 +1,18 @@
+[project]
+name = "heardle"
+version = "1.0.0"
+description = "A web app for playing the game of heardle."
+dependencies = [
+    "flask",
+]
+
+[build-system]
+requires = ["flit_core<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+branch = true
+source = ["heardle"]
