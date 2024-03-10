@@ -31,8 +31,6 @@ def play(playlist_id):
     track = None
     while not track or track['items'][0]['track']['preview_url'] == None:
         track = spotify.retrieve_playlist_track(playlist_id, limit=1, offset=random.randrange(0, playlist['tracks']['total']))
-        print(track['items'][0]['track']['name'])
-    #Get length of playlist
     return render_template('game/play.html', playlist=playlist, track=track)
 
 
