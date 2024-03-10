@@ -5,7 +5,7 @@ from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
 
-from heardle import spotify
+import spotify
 
 bp = Blueprint('game', __name__)
 
@@ -39,6 +39,7 @@ def play(playlist_id):
 
 
 """
+PlaylistID = 1CZb3d0AulrYDaJKi4636r
 Useful api links
 playlist_cover_image(playlist_id)
 """
