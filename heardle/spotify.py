@@ -8,11 +8,17 @@ def init_spotify_client():
 
 
 def retrieve_playlist(playlist_id):
-    print("test")
     sp = init_spotify_client()
 
     # Retrieve the playlist
     playlist = sp.playlist(playlist_id)
     
     return playlist
+
+def retrieve_playlist_track(playlist_id, limit=1, offset=0):
+    sp = init_spotify_client()
+
+    # Retrieve the tracks
+    tracks = sp.playlist_tracks(playlist_id, limit=limit, offset=offset)
+    return tracks
     

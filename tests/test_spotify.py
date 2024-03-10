@@ -1,6 +1,6 @@
 import pytest
 from unittest.mock import patch
-from heardle.util import spotify
+from heardle import spotify
 
 def test_mocking_spotipy():
     """
