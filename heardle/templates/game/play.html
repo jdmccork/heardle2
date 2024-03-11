@@ -17,6 +17,15 @@
   <audio preload="auto" controls id="song" ontimeupdate="pauseCheck()" onplay="playSong()">
     <source src="{{ track['items'][0]['track']['preview_url'] }}" type="audio/mpeg">
   </audio>
+  <button id="more" onclick="length = length*2">More</button>
+  <details>
+    <summary>Details</summary>
+    {{ track['items'][0]['track']['name'] }}
+    <br>
+    {% for artist in track['items'][0]['track']['artists'] %}
+      <li>{{ artist['name'] }}</li>
+    {% endfor %}
+</details>
 {% endblock %}
 
 {% block footer %}

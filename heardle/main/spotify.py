@@ -6,7 +6,6 @@ def init_spotify_client():
     client_credentials_manager = SpotifyClientCredentials()
     return spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
-
 def retrieve_playlist(playlist_id):
     sp = init_spotify_client()
 
