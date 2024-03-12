@@ -14,10 +14,10 @@ def get_playlist(playlist_id):
     
     return playlist
 
-def get_playlist_track(playlist_id, offset=0):
+def get_track(track_url):
     api = init_soundcloud_client()
 
     # Retrieve the tracks
-    track = api.playlist_tracks(playlist_id, limit=1, offset=offset)
+    track = api.resolve(track_url)
     return track
     
