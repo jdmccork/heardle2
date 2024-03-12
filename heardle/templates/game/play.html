@@ -8,24 +8,27 @@
 
 {% block content %}
 <!--Lists the tracks in the playlist-->
-  <ul>
-    {% for track in playlist['tracks']['items'] %}
-      <li>{{ track['track']['name'] }} : {{ track['track']['preview_url'] }}</li>
+  <!-- <ul>
+    {% for track in playlist.tracks %}
+      <li>{{ track.title }} : {{ track.artist }}</li>
     {% endfor %}
-  </ul>
+  </ul> -->
 
-  <audio preload="auto" controls id="song" ontimeupdate="pauseCheck()" onplay="playSong()">
-    <source src="{{ track['items'][0]['track']['preview_url'] }}" type="audio/mpeg">
-  </audio>
-  <button id="more" onclick="length = length*2">More</button>
-  <details>
-    <summary>Details</summary>
-    {{ track['items'][0]['track']['name'] }}
-    <br>
-    {% for artist in track['items'][0]['track']['artists'] %}
-      <li>{{ artist['name'] }}</li>
-    {% endfor %}
-</details>
+  <button id="play" onclick="play()">Play</button>
+
+  <div id="game">
+
+    <audio preload="auto" controls id="player" ontimeupdate="pauseCheck()" onplay="playSong()">
+      <source src="http://127.0.0.1:5000/test" type="audio/mpeg">
+    </audio>
+    <button id="more" onclick="length = length*2">More</button>
+    <details>
+      <summary>Details</summary>
+      {{ track.title }}
+      <br>
+      <p>{{ track.artist }}</p>
+    </details>
+  </div>
 {% endblock %}
 
 {% block footer %}

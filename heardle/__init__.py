@@ -7,6 +7,12 @@ socketio = SocketIO()
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
+
+    app.config['MYSQL_HOST'] = 'localhost'
+    app.config['MYSQL_USER'] = 'heardle'
+    app.config['MYSQL_PASSWORD'] = 'heardledb'
+    app.config['MYSQL_DB'] = 'flask'
+
     app.config.from_mapping(
         SECRET_KEY='dev',
     )
