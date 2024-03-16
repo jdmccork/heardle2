@@ -3,7 +3,7 @@ from flask import Flask
 from flask_socketio import SocketIO
 from flask_mysqldb import MySQL
 
-socketio = SocketIO()
+serverSocketio = SocketIO()
 
 def create_app():
     # create and configure the app
@@ -23,10 +23,10 @@ def create_app():
     except OSError:
         pass
     
-    import main as main_blueprint
+    from .main import mainBP as main_blueprint
     app.register_blueprint(main_blueprint)
 
-    socketio.init_app(app)
+    serverSocketio.init_app(app)
     return app
 
 app = create_app()

@@ -7,18 +7,18 @@ from flask import (
 from flask_socketio import emit
 import main
 import soundcloud
-import socketio
+import serverSocketio
 # from .. import mysql
 import tempfile
 import json
 
 
-@socketio.on('my event')
+@serverSocketio.on('my event')
 def my_event(message):
     print("test")
     emit('my response', {'data': 'got it!'})
 
-@socketio.on("search")
+@serverSocketio.on("search")
 def search_playlist(playlistName):
     print(playlistName)
     playlist = soundcloud.get_playlist(playlistName)
