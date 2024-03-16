@@ -8,7 +8,9 @@ from flask_socketio import emit
 from . import main
 from . import soundcloud
 from .. import socketio
+# from .. import mysql
 import tempfile
+import json
 
 
 @socketio.on('my event')
@@ -19,43 +21,46 @@ def my_event(message):
 @socketio.on("search")
 def search_playlist(playlistName):
     print(playlistName)
-    playlist = soundcloud.search_playlist(playlistName)
+    playlist = soundcloud.get_playlist(playlistName)
     emit('playlistResponse', {'playlist': playlist})
 
-@main.route('/search', methods=('GET', 'POST'))
+@main.route('/search', methods=['GET', 'POST'])
 def loadPlaylist():
     if request.method == 'POST':
-        playlist_id = request.form['playlistId']
+        playlist = request.form['playlist']
         error = None
 
-        if not playlist_id:
+        if not playlist:
             error = 'Playlist is required.'
 
         if error is None:
-            return redirect(url_for("game.play", playlist_id=playlist_id))
+            session['playlist_url'] = playlist
+            return redirect(url_for("main.play"))
 
         flash(error)
 
     return render_template('game/search.html')
 
-@main.route('/play/<string:playlist_id>', methods=('GET', 'POST'))
-def play(playlist_id):
-    # playlist = soundcloud.get_playlist(playlist_id)
-
-    # randSeed = request.args.get('seed')
-    # random.seed(randSeed)
-    # track = random.choice(playlist.tracks)
-    
-    # print(track)
-    #Get length of playlist
+@main.route('/play', methods=['GET', 'POST'])
+def play():
     return render_template('game/play.html')
 
-@main.route('/test2')
-def test2():
-    playlist = soundcloud.get_playlist("test")
+@main.route('/selectSong', methods=['GET'])
+def selectSong():
+    playlist_url = session['playlist_url'] 
+    # playlist_url = request.args.get('playlist_url')
+    playlist = soundcloud.get_playlist(playlist_url)
+    # if 'playlist_url' in session:
+    #     playlist = session['playlist_url']
+    # else:
+    #     playlist = soundcloud.get_playlist(playlist_url)
+    #     for track in playlist.tracks:
+    #         cursor = mysql.connection.cursor()
+    #         cursor.execute(''' INSERT INTO playlist VALUES(%s,%s,%s)''',(track.title,track.artist,track.playlist_url))
+    #         mysql.connection.commit()
+    #         cursor.close()
 
-    randSeed = request.args.get('seed')
-    random.seed(randSeed)
+
     track = random.choice(playlist.tracks)
 
     # Adds the track title and artist to the response
@@ -69,9 +74,9 @@ def test2():
     
 
 @main.route('/track')
-def test():
+def track():
     track_url = request.args.get('track_url')
-    # track_url = "https://soundcloud.com/stealers-wheel/stuck-in-the-middle-with-you"
+    
     print(track_url)
     track = soundcloud.get_track(track_url)
 

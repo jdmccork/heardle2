@@ -1,6 +1,7 @@
 import os
 from flask import Flask
 from flask_socketio import SocketIO
+from flask_mysqldb import MySQL
 
 socketio = SocketIO()
 
@@ -8,14 +9,13 @@ def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
 
-    app.config['MYSQL_HOST'] = 'localhost'
-    app.config['MYSQL_USER'] = 'heardle'
-    app.config['MYSQL_PASSWORD'] = 'heardledb'
+    app.config['MYSQL_HOST'] = os.environ.get('MYSQL_HOST')
+    app.config['MYSQL_USER'] = os.environ.get('MYSQL_USER')
+    app.config['MYSQL_PASSWORD'] = os.environ.get('MYSQL_PASSWORD')
     app.config['MYSQL_DB'] = 'flask'
 
-    app.config.from_mapping(
-        SECRET_KEY='dev',
-    )
+
+    app.secret_key = os.environ.get('SECRET_KEY')
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
@@ -37,3 +37,4 @@ def create_app(test_config=None):
     return app
 
 app = create_app()
+mysql = MySQL(app)

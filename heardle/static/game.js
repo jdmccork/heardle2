@@ -1,7 +1,5 @@
 var length = 1
 
-let randSeed = getRandomInt(100000)
-
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
@@ -14,7 +12,7 @@ function pauseCheck() {
 }
 
 function playSong() {
-    var current_song = document.getElementById('song')
+    var current_song = document.getElementById('player')
     current_song.currentTime = 0
 }
 
@@ -24,7 +22,7 @@ function play() {
 
     let player = document.getElementById('player')
     
-    fetch("/test2?seed=" + randSeed).then(response => response.json()).then(data => {
+    fetch("/selectSong").then(response => response.json()).then(data => {
         let title = data.title
         let artist = data.artist
         let url = data.url
@@ -38,7 +36,6 @@ function play() {
         artistElement.textContent = artist
     }).then(() => {
         game.hidden = false
-
     })
     
 }
