@@ -1,6 +1,9 @@
 <!doctype html>
-<title>{% block title %}{% endblock %} - Heardle</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<head>
+  <title>{% block title %}{% endblock %} - Heardle</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js" integrity="sha512-aMGMvNYu8Ue4G+fHa359jcPb1u+ytAF+P2SCb+PxrjCdO3n3ZTxJ30zuH39rimUggmTwmh2u7wvQsDTHESnmfQ==" crossorigin="anonymous"></script>
+</head>
 <nav>
   <h1>Heardle</h1>
   <ul>
@@ -8,8 +11,8 @@
       <li><span>{{ g.user['username'] }}</span>
       <li><a href="">Log Out</a>
     {% else %}
-      <li><a href="">Register</a>
-      <li><a href="">Log In</a>
+      <li><a href="/search">Select Playlist</a>
+      <li><a href="/play">Play</a>
     {% endif %}
   </ul>
 </nav>

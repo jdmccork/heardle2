@@ -7,16 +7,18 @@
 {% endblock %}
 
 {% block content %}
-<!--Lists the tracks in the playlist-->
-  <ul>
-    {% for track in playlist['tracks']['items'] %}
-      <li>{{ track['track']['name'] }} : {{ track['track']['preview_url'] }}</li>
-    {% endfor %}
-  </ul>
+  <button id="play" onclick="play()">Play</button>
 
-  <audio preload="auto" controls id="song" ontimeupdate="pauseCheck()" onplay="playSong()">
-    <source src="{{ track['items'][0]['track']['preview_url'] }}" type="audio/mpeg">
-  </audio>
+  <div hidden id="game">
+
+    <audio preload="auto" controls id="player" ontimeupdate="pauseCheck()" onplay="playSong()"></audio>
+    <button id="more" onclick="length = length*2">More</button>
+    <details>
+      <summary>Details</summary>
+      <p id="trackTitle"></p>
+      <p id="trackArtist"></p>
+    </details>
+  </div>
 {% endblock %}
 
 {% block footer %}

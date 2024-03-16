@@ -1,4 +1,7 @@
 # heardle2
-A second attempt at creating the heardle application using Python and Flask
+A second attempt at creating the heardle application using Python and Flask, now using soundcloud
 
-Moving to use soundcloud as spotify does not allow the usage of their API to create games
+TODO:
+Use any playlist
+Add track search
+Store data in session
