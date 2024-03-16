@@ -23,7 +23,7 @@ def create_app():
     except OSError:
         pass
     
-    from .main import main as main_blueprint
+    import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
     socketio.init_app(app)
